@@ -1,0 +1,17 @@
+{
+  "name": "crafity-filesystem",
+  "description": "Crafity File System Framework",
+  "version": "0.0.1",
+  "homepage": "http://crafity.com/projects/crafity.filesystem",
+  "repository": {
+    "url": ""
+  },
+  "author": "Bart Riemens <briemens@crafity.com>",
+  "main": "./lib/crafity.filesystem.js",
+  "directories": {
+    "lib": "lib"
+  },
+  "engines": {
+    "node": "*"
+  }
+}
