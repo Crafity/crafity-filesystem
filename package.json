@@ -1,17 +1,57 @@
 {
-  "name": "crafity-filesystem",
-  "description": "Crafity File System Framework",
-  "version": "0.0.1",
-  "homepage": "http://crafity.com/projects/crafity.filesystem",
-  "repository": {
-    "url": ""
-  },
-  "author": "Bart Riemens <briemens@crafity.com>",
-  "main": "./lib/crafity.filesystem.js",
-  "directories": {
-    "lib": "lib"
-  },
-  "engines": {
-    "node": "*"
-  }
+	"name": "crafity-filesystem",
+	"description": "Crafity File System Framework",
+	"version": "0.0.2",
+	"author": "Bart Riemens <briemens@crafity.com>",
+	"homepage": "https://github.com/Crafity/crafity-filesystem/wiki",
+	"keywords": [ "util", "utility", "fs", "files", "filesystem", "io" ],
+	"maintainers": [
+		{
+			"name": "Bart Riemens",
+			"email": "briemens@crafity.com",
+			"web": "http://crafity.com/about/bart"
+		},
+		{
+			"name": "Galina Slavova",
+			"email": "galina@crafity.com",
+			"web": "http://crafity.com/about/galina"
+		}
+	],
+	"contributors": [
+		{
+			"name": "Bart Riemens",
+			"email": "briemens@crafity.com",
+			"web": "http://crafity.com/about/bart"
+		},
+		{
+			"name": "Galina Slavova",
+			"email": "galina@crafity.com",
+			"web": "http://crafity.com/about/galina"
+		}
+	],
+	"main": "./lib/crafity.filesystem.js",
+	"directories": {
+		"lib": "lib",
+		"test": "test"
+	},
+	"licenses": [
+		{
+			"type": "The MIT License",
+			"url": "https://github.com/Crafity/crafity-filesystem/blob/master/LICENSE"
+		}
+	],
+	"bugs": "https://github.com/Crafity/crafity-filesystem/issues",
+	"repositories": [
+		{
+			"type": "git",
+			"url": "https://github.com/Crafity/crafity-filesystem.git"
+		}
+	],
+	"dependencies": {
+		"crafity-core": "*",
+		"crafity-watch": "*"
+	},
+	"engines": {
+		"node": "*"
+	}
 }
