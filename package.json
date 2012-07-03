@@ -1,7 +1,7 @@
 {
 	"name": "crafity-filesystem",
 	"description": "Crafity File System Framework",
-	"version": "0.0.4",
+	"version": "0.0.5",
 	"author": "Bart Riemens <briemens@crafity.com>",
 	"homepage": "https://github.com/Crafity/crafity-filesystem/wiki",
 	"keywords": [ "util", "utility", "fs", "files", "filesystem", "io" ],
@@ -29,7 +29,7 @@
 			"web": "http://crafity.com/about/galina"
 		}
 	],
-	"main": "./lib/crafity.filesystem.js",
+	"main": "./main.js",
 	"directories": {
 		"lib": "lib",
 		"test": "test"
@@ -53,5 +53,8 @@
 	},
 	"engines": {
 		"node": "*"
+	},
+	"scripts": {
+		"prepublish": "npm prune"
 	}
 }

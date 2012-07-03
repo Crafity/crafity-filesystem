@@ -14,7 +14,7 @@
 
 var core = require('crafity-core')
 	, fs = require('fs')
-	, watch = require('./crafity.watch')
+	, watch = require('./lib/crafity.watch.js')
 	, pathUtil = require('path')
 	, EventEmitter = require('events').EventEmitter
 	, arrays = core.arrays
@@ -31,7 +31,7 @@ exports.fullname = 'crafity.filesystem';
  * Framework version.
  */
 
-exports.version = '0.0.1';
+exports.version = '0.0.5';
 
 /**
  * Initialize module
@@ -54,9 +54,22 @@ function Filesystem() {
 		;
 
 	/**
+	 * Get this module's full name
+	 */
+	this.fullname = function () {
+		return exports.fullname;
+	};
+
+	/**
+	 * Get this module's version number
+	 */
+	this.version = function () {
+		return exports.version;
+	};
+
+	/**
 	 *
 	 */
-
 	this.combine = function () {
 		var args = arrays.toArray(arguments);
 		return pathUtil.join.apply(pathUtil, args);
