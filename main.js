@@ -126,7 +126,7 @@ function Filesystem() {
 	Directory.prototype.typeName = "Directory";
 	Directory.prototype.type = Directory;
 
-	this.getAllFiles = function (path, pattern, ignoreList, deep, callback, directory) {
+	this.getAllFilesAsync = function (path, pattern, ignoreList, deep, callback, directory) {
 		if (!path || typeof path !== 'string') {
 			throw new Error("Path is not specified");
 		}
@@ -186,12 +186,12 @@ function Filesystem() {
 		return publicSynchronizer;
 	};
 
-	this.getAllFilesWithContent = function (path, pattern, deep, callback) {
+	this.getAllFiles = function (path, pattern, deep, callback) {
 		if (!path || typeof path !== 'string') {
 			throw new Error("Path is not specified");
 		}
 		if (deep === true) {
-			throw new Error("Deep searching is not yet implemented.");
+			throw new Error("Deep searching is not yet implemented.")
 		}
 		if (deep && deep instanceof Function && callback === undefined) {
 			callback = deep;
@@ -204,19 +204,51 @@ function Filesystem() {
 		if (pattern && typeof pattern === 'boolean') {
 			deep = pattern;
 		}
-		var synchronizer = new core.Synchronizer()
-			, dir;
 
-		self.getAllFiles(path, pattern, [], deep, synchronizer.register( function (err, files) {
-			if (files.name === ".") {
-				dir = files;
-			}
-		})).onfinish(function (err, result) {
-				dir.files.forEach(function (file) {
-					file.readContent(synchronizer.register(file.name));
+		fs.readdir(path, function (err, files) {
+			if (err) { return callback(err); }
+			var selectedFiles = [];
+			if (pattern) {
+				files.forEach(function (file) {
+					if (!self.matchFilePattern(file, pattern)) { return; }
+					selectedFiles.push(file);
 				});
-				synchronizer.onfinish(callback);
+				return callback(err, selectedFiles);
+			} else {
+				return callback(err, files);
+			}
+		});
+	};
+
+	this.getAllFilesWithContent = function (path, pattern, deep, callback) {
+		if (!path || typeof path !== 'string') {
+			throw new Error("Path is not specified");
+		}
+		if (deep === true) {
+			throw new Error("Deep searching is not yet implemented.")
+		}
+		if (deep && deep instanceof Function && callback === undefined) {
+			callback = deep;
+			deep = false;
+		}
+		if (pattern && pattern instanceof Function && callback === undefined) {
+			callback = pattern;
+			pattern = undefined;
+		}
+		if (pattern && typeof pattern === 'boolean') {
+			deep = pattern;
+		}
+
+		self.getAllFiles(path, pattern, deep, function (err, files) {
+			if (err) { return callback(err); }
+			var synchronizer = new core.Synchronizer();
+
+			files.forEach(function (file) {
+				fs.readFile(self.combine(path, file), synchronizer.register(file));
 			});
+
+			synchronizer.onfinish(callback);
+		});
 	};
 
 	this.watchFolder = function (folder, options, callback) {
