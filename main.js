@@ -206,7 +206,7 @@ function Filesystem() {
 			deep = pattern;
 		}
 
-		self.getAllFiles(path, pattern, deep, function (err, files) {
+		self.getAllFiles(path, pattern, [], deep, function (err, files) {
 			if (err) { return callback(err); }
 			var synchronizer = new core.Synchronizer();
 
