@@ -31,7 +31,7 @@ exports.fullname = 'crafity.filesystem';
  * Framework version.
  */
 
-exports.version = '0.0.7';
+exports.version = '0.0.8';
 
 /**
  * Initialize module
