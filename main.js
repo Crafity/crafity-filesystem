@@ -150,10 +150,9 @@ function Filesystem() {
 		process.nextTick(localSynchronizer.register(function () {
 			callback(null, currentDirectory);
 		}));
-
+		
 		fs.readdir(path, localSynchronizer.register(function (err, objects) {
 			if (err) { return callback(err); }
-
 			objects.forEach(function (object) {
 				fs.stat(self.combine(path, object), localSynchronizer.register(function (err, stat) {
 					if (ignoreList.indexOf(object) > -1) { return; }
@@ -205,17 +204,19 @@ function Filesystem() {
 		if (pattern && typeof pattern === 'boolean') {
 			deep = pattern;
 		}
+		var synchronizer = new core.Synchronizer()
+			, dir;
 
-		self.getAllFiles(path, pattern, [], deep, function (err, files) {
-			if (err) { return callback(err); }
-			var synchronizer = new core.Synchronizer();
-
-			files.forEach(function (file) {
-				fs.readFile(self.combine(path, file), synchronizer.register(file));
+		self.getAllFiles(path, pattern, [], deep, synchronizer.register( function (err, files) {
+			if (files.name === ".") {
+				dir = files;
+			}
+		})).onfinish(function (err, result) {
+				dir.files.forEach(function (file) {
+					file.readContent(synchronizer.register(file.name));
+				});
+				synchronizer.onfinish(callback);
 			});
-
-			synchronizer.onfinish(callback);
-		});
 	};
 
 	this.watchFolder = function (folder, options, callback) {
