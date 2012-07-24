@@ -31,7 +31,7 @@ exports.fullname = 'crafity.filesystem';
  * Framework version.
  */
 
-exports.version = '0.0.8';
+exports.version = '0.0.9';
 
 /**
  * Initialize module
@@ -162,7 +162,7 @@ function Filesystem() {
 							var dir = new Directory(currentDirectory, path, object);
 							dir.level = currentDirectory.level + 1;
 							currentDirectory.directories.push(dir);
-							self.getAllFiles(self.combine(path, object), pattern, ignoreList, deep, callback, dir)
+							self.getAllFilesAsync(self.combine(path, object), pattern, ignoreList, deep, callback, dir)
 								.on("finished", localSynchronizer.register(function () {
 							}));
 						}));
