@@ -1,7 +1,7 @@
-/*jslint node:true, bitwise: true, unparam: true, maxerr: 50, white: true */
-/*globals exports:true, module, require, process, Filesystem */
+/*jslint bitwise: true, unparam: true, maxerr: 50, white: true, ass: true */
+/*globals exports:true, module, require, process */
 /*!
- * crafity.filesystem
+ * crafity-filesystem
  * Copyright(c) 2011 Crafity
  * Copyright(c) 2011 Bart Riemens
  * Copyright(c) 2011 Galina Slavova
@@ -23,18 +23,6 @@ var core = require('crafity-core')
   ;
 
 /**
- * Framework name.
- */
-
-exports.fullname = 'crafity.filesystem';
-
-/**
- * Framework version.
- */
-
-exports.version = '0.0.10';
-
-/**
  * Initialize module
  */
 
@@ -51,22 +39,7 @@ function getExtensionPattern(pattern) {
 function Filesystem() {
   "use strict";
   var self = this
-    , folders = {}
     ;
-
-  /**
-   * Get this module's full name
-   */
-  this.fullname = function () {
-    return exports.fullname;
-  };
-
-  /**
-   * Get this module's version number
-   */
-  this.version = function () {
-    return exports.version;
-  };
 
   /**
    *
@@ -94,11 +67,11 @@ function Filesystem() {
     this.readContent = function (callback) {
       if (internal.data) {
         return callback(null, internal.data);
-      } else {
-        fs.readFile(self.combine(path, file), function (err, data) {
-          return callback(err, data ? internal.data = data : null);
-        });
       }
+      fs.readFile(self.combine(path, file), function (err, data) {
+        return callback(err, data ? internal.data = data : null);
+      });
+
     };
     this.dispose = function () {
       internal.data = undefined;
@@ -119,6 +92,7 @@ function Filesystem() {
       return parent;
     };
     this.dispose = function () {
+      return false;
     };
     this.level = 0;
   }
@@ -165,9 +139,11 @@ function Filesystem() {
               currentDirectory.directories.push(dir);
               self.getAllFilesAsync(self.combine(path, object), pattern, ignoreList, deep, callback, dir)
                 .on("finished", localSynchronizer.register(function () {
-              }));
+                  return false;
+                }));
             }));
-          } else if (stat.isFile()) {
+          }
+          if (stat.isFile()) {
             if (!self.matchFilePattern(object, pattern)) { return; }
             return process.nextTick(localSynchronizer.register(function () {
               var file = new File(currentDirectory, path, object);
@@ -192,7 +168,7 @@ function Filesystem() {
       throw new Error("Path is not specified");
     }
     if (deep === true) {
-      throw new Error("Deep searching is not yet implemented.")
+      throw new Error("Deep searching is not yet implemented.");
     }
     if (deep && deep instanceof Function && callback === undefined) {
       callback = deep;
@@ -215,9 +191,9 @@ function Filesystem() {
           selectedFiles.push(file);
         });
         return callback(err, selectedFiles);
-      } else {
-        return callback(err, files);
       }
+      return callback(err, files);
+
     });
   };
 
@@ -226,7 +202,7 @@ function Filesystem() {
       throw new Error("Path is not specified");
     }
     if (deep === true) {
-      throw new Error("Deep searching is not yet implemented.")
+      throw new Error("Deep searching is not yet implemented.");
     }
     if (deep && deep instanceof Function && callback === undefined) {
       callback = deep;
@@ -273,6 +249,7 @@ function Filesystem() {
         }
       },
       next: function (err, watchers) {
+        return false;
         // Watching all setup
 //        console.log('Now watching  our paths', arguments);
 
@@ -287,6 +264,7 @@ function Filesystem() {
       }
     });
 
+    /*
     if (!callback) {
       callback = options;
       options = {};
@@ -335,6 +313,7 @@ function Filesystem() {
         monitor.on("removed", onchange);
       });
     }
+    */
   };
 
   this.matchFilePattern = function (filename, pattern) {
@@ -358,3 +337,15 @@ function Filesystem() {
 Filesystem.prototype = fs;
 
 module.exports = new Filesystem();
+
+/**
+ * Framework name.
+ */
+
+module.exports.fullname = 'crafity-filesystem';
+
+/**
+ * Framework version.
+ */
+
+module.exports.version = '0.0.10';
