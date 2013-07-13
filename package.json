@@ -1,62 +1,62 @@
 {
-	"name": "crafity-filesystem",
-	"description": "Crafity File System Framework",
-	"version": "0.0.10",
-	"author": "Bart Riemens <briemens@crafity.com>",
-	"homepage": "https://github.com/Crafity/crafity-filesystem/wiki",
-	"keywords": [ "util", "utility", "fs", "files", "filesystem", "io" ],
-	"maintainers": [
-		{
-			"name": "Bart Riemens",
-			"email": "briemens@crafity.com",
-			"web": "http://crafity.com/about/bart"
-		},
-		{
-			"name": "Galina Slavova",
-			"email": "galina@crafity.com",
-			"web": "http://crafity.com/about/galina"
-		}
-	],
-	"contributors": [
-		{
-			"name": "Bart Riemens",
-			"email": "briemens@crafity.com",
-			"web": "http://crafity.com/about/bart"
-		},
-		{
-			"name": "Galina Slavova",
-			"email": "galina@crafity.com",
-			"web": "http://crafity.com/about/galina"
-		}
-	],
-	"main": "./main.js",
-	"directories": {
-		"lib": "lib",
-		"test": "test"
-	},
-	"licenses": [
-		{
-			"type": "The MIT License",
-			"url": "https://github.com/Crafity/crafity-filesystem/blob/master/LICENSE"
-		}
-	],
-	"bugs": "https://github.com/Crafity/crafity-filesystem/issues",
-	"repositories": [
-		{
-			"type": "git",
-			"url": "https://github.com/Crafity/crafity-filesystem.git"
-		}
-	],
-	"dependencies": {
-		"crafity-core": "*",
-		"crafity-jstest": "*",
-		"watchr": "*"
-	},
-	"engines": {
-		"node": "*"
-	},
-	"scripts": {
-		"prepublish": "npm prune",
-		"test": "./runtests"
-	}
+  "name": "crafity-filesystem",
+  "description": "Crafity File System Framework",
+  "version": "0.0.11",
+  "author": "Bart Riemens <briemens@crafity.com>",
+  "homepage": "https://github.com/Crafity/crafity-filesystem/wiki",
+  "keywords": [ "util", "utility", "fs", "files", "filesystem", "io" ],
+  "maintainers": [
+    {
+      "name": "Bart Riemens",
+      "email": "briemens@crafity.com",
+      "web": "http://crafity.com/about/bart"
+    },
+    {
+      "name": "Galina Slavova",
+      "email": "galina@crafity.com",
+      "web": "http://crafity.com/about/galina"
+    }
+  ],
+  "contributors": [
+    {
+      "name": "Bart Riemens",
+      "email": "briemens@crafity.com",
+      "web": "http://crafity.com/about/bart"
+    },
+    {
+      "name": "Galina Slavova",
+      "email": "galina@crafity.com",
+      "web": "http://crafity.com/about/galina"
+    }
+  ],
+  "main": "./main.js",
+  "directories": {
+    "lib": "lib",
+    "test": "test"
+  },
+  "licenses": [
+    {
+      "type": "The MIT License",
+      "url": "https://github.com/Crafity/crafity-filesystem/blob/master/LICENSE"
+    }
+  ],
+  "bugs": "https://github.com/Crafity/crafity-filesystem/issues",
+  "repositories": [
+    {
+      "type": "git",
+      "url": "https://github.com/Crafity/crafity-filesystem.git"
+    }
+  ],
+  "dependencies": {
+    "crafity-core": "0.0.14",
+    "crafity-jstest": "0.0.5",
+    "watchr": "2.4.3"
+  },
+  "engines": {
+    "node": "*"
+  },
+  "scripts": {
+    "prepublish": "npm prune",
+    "test": "scripts/npm-test.sh"
+  }
 }
