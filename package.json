@@ -48,8 +48,8 @@
     }
   ],
   "dependencies": {
-    "crafity-core": "0.1.*",
-    "crafity-jstest": "0.1.*",
+    "crafity-core": "~0.1.0",
+    "crafity-jstest": "~0.1.0",
     "watchr": "2.4.3"
   },
   "engines": {
