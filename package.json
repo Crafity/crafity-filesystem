@@ -1,7 +1,7 @@
 {
   "name": "crafity-filesystem",
   "description": "Crafity File System Framework",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "author": "Bart Riemens <briemens@crafity.com>",
   "homepage": "https://github.com/Crafity/crafity-filesystem/wiki",
   "keywords": [ "util", "utility", "fs", "files", "filesystem", "io" ],
