@@ -13,22 +13,21 @@
  * Test dependencies.
  */
 
-var jstest = require('crafity-jstest')
+var jstest = require('crafity-jstest').createContext("Testing crafity filesystem")
   , assert = jstest.assert
-  , context = jstest.createContext("Testing crafity filesystem")
   , fs = require('../main.js');
 
 /**
- * The tests
+ * Run the tests
  */
-var tests = {
+jstest.run({
 
   'crafity.filesystem must be the same as the default fs module': function () {
 
     assert.isDefined(fs, "Expected fs to be defined");
-    
+
     var proto = '__proto__';
-    
+
     assert.areEqual(require('fs'), fs[proto], "Expected fs to be the standard module");
   },
 
@@ -51,9 +50,4 @@ var tests = {
     });
   }
 
-};
-
-/**
- * Run the tests
- */
-context.run(tests);
+});

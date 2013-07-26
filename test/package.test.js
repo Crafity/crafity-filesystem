@@ -12,64 +12,56 @@
 /**
  * Test dependencies.
  */
-  
-var jstest = require('crafity-jstest')
-	, assert = jstest.assert
-	, context = jstest.createContext()
-	, fs = require('fs')
-	;
 
-(function packageTests() {
-	/**
-	 * The tests
-	 */
-	var tests = {
+var jstest = require('crafity-jstest').createContext("Module Package Tests")
+  , assert = jstest.assert
+  , fs = require('fs')
+  ;
 
-		'package---> The module must have main.js file': function () {
-			
-			var main = require('../main');
-			assert.isDefined(main, "Expected main to be defined");
-		},
+/**
+ * Run the tests
+ */
 
-		'package---> The module must have a fullname': function () {
-      var main = require('../main');
-			assert.isDefined(main.fullname, "Expected fullname to be defined");
-		},
+jstest.run({
 
-		'package---> The module must have a version number': function () {
-      var main = require('../main');
-			assert.isDefined(main.version, "Expected version number to be defined");
-		},
+  'The module must have main.js file': function () {
 
-		'package---> The module must have package.json file': function (context) {
-			fs.readFileSync("./package.json");
-		},
+    var main = require('../main');
+    assert.isDefined(main, "Expected main to be defined");
+  },
 
-		'package---> The module must have the same name as quoted in package.json': function () {
+  'The module must have a fullname': function () {
+    var main = require('../main');
+    assert.isDefined(main.fullname, "Expected fullname to be defined");
+  },
 
-      var main = require('../main');
-			var data = fs.readFileSync("./package.json")
-				, json = JSON.parse(data.toString());
+  'The module must have a version number': function () {
+    var main = require('../main');
+    assert.isDefined(main.version, "Expected version number to be defined");
+  },
 
-      assert.areEqual(main.fullname, json.name, "Expected module name to be the same in both places.");
+  'The module must have package.json file': function (context) {
+    fs.readFileSync("./package.json");
+  },
 
-		},
+  'The module must have the same name as quoted in package.json': function () {
 
-		'package---> The module must have the same version as quoted in package.json': function () {
+    var main = require('../main');
+    var data = fs.readFileSync("./package.json")
+      , json = JSON.parse(data.toString());
 
-      var main = require('../main');
-			var data = fs.readFileSync("./package.json")
-				, json = JSON.parse(data.toString());
+    assert.areEqual(main.fullname, json.name, "Expected module name to be the same in both places.");
 
-			assert.isDefined(json.version, "Expected fs to be defined");
-			assert.areEqual(main.version, json.version, "Expected the same module version!");
-		}
+  },
 
-	};
+  'The module must have the same version as quoted in package.json': function () {
 
-	/**
-	 * Run the tests
-	 */
-	context.run(tests);
+    var main = require('../main');
+    var data = fs.readFileSync("./package.json")
+      , json = JSON.parse(data.toString());
 
-}());
+    assert.isDefined(json.version, "Expected fs to be defined");
+    assert.areEqual(main.version, json.version, "Expected the same module version!");
+  }
+
+});
