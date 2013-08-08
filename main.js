@@ -78,7 +78,7 @@ function Filesystem() {
     };
   }
 
-  File.prototype = new EventEmitter();
+  File.prototype = EventEmitter.prototype;
   File.prototype.typeName = "File";
   File.prototype.type = File;
 
@@ -97,7 +97,7 @@ function Filesystem() {
     this.level = 0;
   }
 
-  Directory.prototype = new EventEmitter();
+  Directory.prototype = EventEmitter.prototype;
   Directory.prototype.typeName = "Directory";
   Directory.prototype.type = Directory;
 
