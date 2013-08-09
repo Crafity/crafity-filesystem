@@ -364,4 +364,4 @@ module.exports.fullname = 'crafity-filesystem';
  * Framework version.
  */
 
-module.exports.version = '0.1.4';
+module.exports.version = '0.1.5';
