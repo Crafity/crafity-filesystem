@@ -1,7 +1,7 @@
 {
   "name": "crafity-filesystem",
   "description": "Crafity File System Framework",
-  "version": "0.1.6",
+  "version": "0.1.7",
   "author": "Galina Slavova <galina@crafity.com> and Bart Riemens <briemens@crafity.com>",
   "homepage": "https://github.com/Crafity/crafity-filesystem/wiki",
   "keywords": [ "util", "utility", "fs", "files", "filesystem", "io", "watcher", "file watcher", "directory watcher" ],
@@ -54,7 +54,6 @@
     "node": "*"
   },
   "scripts": {
-    "prepublish": "npm prune",
-    "test": "scripts/npm-test.sh"
+    "prepublish": "npm prune"
   }
 }
